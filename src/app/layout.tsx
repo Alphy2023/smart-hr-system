@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   title: {
     template: "%s | Smarthr System", 
     absolute: "Smarthr System",
+  },
   description: "The Best HR Solution",
-  }
 };
 
 export default function RootLayout({
