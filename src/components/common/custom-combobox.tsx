@@ -19,9 +19,9 @@ import {
 } from "@/components/ui/popover";
 
 interface ComboboxProps {
-  dataValues: { value: string | number; label: string }[];
+  dataValues?: { value: string; label: string }[];
   placeholder?: string;
-  value: string | number;
+  value?: string;
   onChange: (value: string | number) => void;
 }
 

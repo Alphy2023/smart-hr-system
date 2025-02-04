@@ -20,7 +20,7 @@ type FrameworkData={
 }
 export default function Home() {
 
-  const [value,setValue] = useState(null)
+  const [value,setValue] = useState<string>("")
   const resumeData:ResumeData = {
     name:"Jane trim",
     email:"john@example.com"
