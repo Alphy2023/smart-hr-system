@@ -11,6 +11,7 @@ import {useState} from "react"
 
 type ResumeData ={
   name:string;
+  email:string;
 
 }
 type FrameworkData={
