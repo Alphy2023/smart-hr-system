@@ -22,7 +22,7 @@ interface ComboboxProps {
   dataValues?: { value: string; label: string }[];
   placeholder?: string;
   value?: string;
-  onChange: (value: string | number) => void;
+  onChange: (value: string) => void;
 }
 
 export const CustomCombobox = ({
