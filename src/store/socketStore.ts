@@ -21,7 +21,7 @@ export type User={
 interface SocketState {
   socket: Socket | null;
   user:User|null;
-  setUser:(user:User | null)=<void;
+  setUser:(user:User | null)=>void;
   onlineUsers: OnlineUser[];
   setSocket: (socket: Socket | null) => void;
   setOnlineUsers: (users: OnlineUser[]) => void;
