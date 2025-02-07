@@ -11,12 +11,12 @@ const SocketContext = createContext(null);
 const socketUrl:string = "http://localhost:8080"
 
 
-interface SockerProviderProps{
-    children:React.ReactNode,
-    user?:User
-}
+// interface SockerProviderProps{
+//     children:React.ReactNode,
+//     user?:User
+// }
 
-export const SocketProvider = ({ children, user }) => {
+export const SocketProvider = ({ children}) => {
   const {setOnlineUsers,setSocket } = useSocketStore();
   // const [socket,setSocket] = useState<Socket>(null)
 
