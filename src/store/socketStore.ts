@@ -20,6 +20,8 @@ export type User={
 
 interface SocketState {
   socket: Socket | null;
+  user:User|null;
+  setUser:(user:User | null)=<void;
   onlineUsers: OnlineUser[];
   setSocket: (socket: Socket | null) => void;
   setOnlineUsers: (users: OnlineUser[]) => void;
@@ -27,6 +29,8 @@ interface SocketState {
 
 export const useSocketStore = create<SocketState>((set) => ({
   socket: null,
+  user:null,
+  setUser:(user)=>set({user:user}),
   onlineUsers: [],
   setSocket: (socket) => set({ socket }),
   setOnlineUsers: (users) => set({ onlineUsers: users }),

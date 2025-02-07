@@ -16,7 +16,7 @@ interface SockerProviderProps{
 }
 
 export const SocketProvider = ({ children}:SockerProviderProps) => {
-  const {setOnlineUsers,setSocket } = useSocketStore();
+  const {setOnlineUsers,setSocket,user } = useSocketStore();
   // const [socket,setSocket] = useState<Socket>(null)
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export const SocketProvider = ({ children}:SockerProviderProps) => {
     });
 
     return () => {
-      newSocket.emit("user-offline", user?.id);
+      newSocket.emit("user-offline", user?.userId);
       newSocket.disconnect();
       setSocket(null);
     };
