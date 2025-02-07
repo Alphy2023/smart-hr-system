@@ -14,10 +14,9 @@ const socketUrl:string = "http://localhost:8080"
 interface SockerProviderProps{
     children:React.ReactNode,
 }
-const test = ""
 
 export const SocketProvider = ({ children}:SockerProviderProps) => {
-  const {setOnlineUsers,setSocket } = useSocketStore();
+  const {setOnlineUsers,setSocket,user } = useSocketStore();
   // const [socket,setSocket] = useState<Socket>(null)
 
   useEffect(() => {
@@ -48,13 +47,13 @@ export const SocketProvider = ({ children}:SockerProviderProps) => {
     });
 
     return () => {
-      // newSocket.emit("user-offline", user?.userId);
+      newSocket.emit("user-offline", user?.userId);
       newSocket.disconnect();
       setSocket(null);
     };
-  }, [setSocket, setOnlineUsers]);
+  }, [user,setSocket, setOnlineUsers]);
 
-  return <SocketContext.Provider value={{}}>{children}</SocketContext.Provider>;
+  return <SocketContext.Provider value={{setOnlineUsers,setSocket}}>{children}</SocketContext.Provider>;
 };
 
 export const useSocket = () => useContext(SocketContext);
