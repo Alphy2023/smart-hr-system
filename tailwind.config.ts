@@ -10,6 +10,7 @@ export default {
   theme: {
   	extend: {
   		colors: {
+			dashColor:"#f4f4f4",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -76,7 +77,8 @@ export default {
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+			'spin-fast': 'spin 0.3s linear infinite', 
   		}
   	}
   },
