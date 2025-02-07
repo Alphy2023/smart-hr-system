@@ -1,9 +1,19 @@
-import {PrismaClient} from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
+// Extend the global object to include the `prisma` property
 declare global {
-    let prisma : PrismaClient | undefined
-};
-export const db = globalThis.prisma || new PrismaClient();
+  namespace NodeJS {
+    interface Global {
+      prisma?: PrismaClient;
+    }
+  }
+}
 
-if(process.env.NODE_ENV !== "production") globalThis.prisma =db;
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
+// Use the existing instance in development to avoid multiple connections
+export const db = globalForPrisma.prisma ?? new PrismaClient();
+
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = db;
+}
