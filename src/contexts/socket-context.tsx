@@ -14,6 +14,7 @@ const socketUrl:string = "http://localhost:8080"
 interface SockerProviderProps{
     children:React.ReactNode,
 }
+const test = ""
 
 export const SocketProvider = ({ children}:SockerProviderProps) => {
   const {setOnlineUsers,setSocket } = useSocketStore();
