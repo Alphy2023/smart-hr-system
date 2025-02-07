@@ -1,12 +1,15 @@
 "use client";
 
 import { createContext, useContext, useEffect,useState } from "react";
-import { useSocketStore,User } from "@/store/socketStore";
-import { io } from "socket.io-client";
-import { Socket } from "socket.io-client";
+import { useSocketStore,User,OnlineUser } from "@/store/socketStore";
+import {io, Socket } from "socket.io-client";
 
 
-const SocketContext = createContext(null);
+interface SocketContextType {
+  socket: Socket | null;
+}
+
+const SocketContext = createContext<SocketContextType | null>(null);
 
 const socketUrl:string = "http://localhost:8080"
 
@@ -16,8 +19,7 @@ interface SockerProviderProps{
 }
 
 export const SocketProvider = ({ children}:SockerProviderProps) => {
-  const {setOnlineUsers,setSocket} = useSocketStore();
-  // const [socket,setSocket] = useState<Socket>(null)
+  const {setOnlineUsers,setSocket,user,socket} = useSocketStore();
 
   useEffect(() => {
     // if (!user) return;
@@ -47,13 +49,19 @@ export const SocketProvider = ({ children}:SockerProviderProps) => {
     });
 
     return () => {
-      // newSocket.emit("user-offline", user?.userId);
+      newSocket.emit("user-offline", user?.userId);
       newSocket.disconnect();
       setSocket(null);
     };
-  }, [setSocket, setOnlineUsers]);
+  }, [user,setSocket, setOnlineUsers]);
 
-  return <SocketContext.Provider value={{setOnlineUsers,setSocket}}>{children}</SocketContext.Provider>;
+  return <SocketContext.Provider value={{socket}}>{children}</SocketContext.Provider>;
 };
 
-export const useSocket = () => useContext(SocketContext);
+export const useSocket = () => {
+  const context = useContext(SocketContext);
+  if (!context) {
+    throw new Error("useSocket must be used within a SocketProvider");
+  }
+  return context;
+};;
